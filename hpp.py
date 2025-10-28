@@ -17,7 +17,10 @@ cleaned_content = content.replace('\u00A0', ' ')
 
 with open(output_file, "w", encoding="utf-8") as f:
     f.write(cleaned_content)
+import os
 
+BASE_DIR = os.getcwd()
+MODEL_PATH = os.path.join(BASE_DIR, "best_model.pkl")
 print(f"Cleaned file saved as {output_file}")
 MODEL_PATH = os.path.join(BASE_DIR, "best_model.pkl")
 SCALER_PATH = os.path.join(BASE_DIR, "scaler.pkl")
@@ -76,5 +79,6 @@ if st.button("Predict Selling Price"):
     predicted_price = model.predict(X_processed_ordered)[0]
 
     st.success(f"💰 Predicted Selling Price: ₹{predicted_price:,.2f}")
+
 
 
