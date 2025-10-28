@@ -5,8 +5,10 @@ import numpy as np
 import joblib
 import os
 
-# === Define paths ===
-BASE_DIR = r"C:\Users\E105484\OneDrive - Road Accident Fund\Documents\Regynisis\StreamlitApp"
+try:
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+except NameError:
+    BASE_DIR = os.getcwd()
 MODEL_PATH = os.path.join(BASE_DIR, "best_model.pkl")
 SCALER_PATH = os.path.join(BASE_DIR, "scaler.pkl")
 ENCODER_PATH = os.path.join(BASE_DIR, "one_hot_encoder.pkl")
@@ -64,3 +66,4 @@ if st.button("Predict Selling Price"):
     predicted_price = model.predict(X_processed_ordered)[0]
 
     st.success(f"💰 Predicted Selling Price: ₹{predicted_price:,.2f}")
+
