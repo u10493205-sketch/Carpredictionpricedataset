@@ -8,7 +8,10 @@ from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.metrics import mean_squared_error, r2_score
 
 # Define paths
-BASE_DIR = r"C:\Users\E105484\OneDrive - Road Accident Fund\Documents\Regynisis\StreamlitApp"
+try:
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+except NameError:
+    BASE_DIR = os.getcwd()
 DATA_FILE = os.path.join(BASE_DIR, "car_price_dataset.csv")
 MODEL_PATH = os.path.join(BASE_DIR, "best_model.pkl")
 SCALER_PATH = os.path.join(BASE_DIR, "scaler.pkl")
@@ -67,3 +70,4 @@ feature_names = numerical_features + list(encoded_feature_names)
 joblib.dump(feature_names, FEATURE_NAMES_PATH)
 
 print("✅ Model and preprocessing files saved successfully!")
+
