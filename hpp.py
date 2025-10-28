@@ -5,10 +5,20 @@ import numpy as np
 import joblib
 import os
 
-try:
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-except NameError:
-    BASE_DIR = os.getcwd()
+#clean_nonbreaking_spaces.py
+input_file = "hpp.py"
+output_file = "hpp_cleaned.py"
+
+with open(input_file, "r", encoding="utf-8") as f:
+    content = f.read()
+
+# Replace non-breaking spaces with regular spaces
+cleaned_content = content.replace('\u00A0', ' ')
+
+with open(output_file, "w", encoding="utf-8") as f:
+    f.write(cleaned_content)
+
+print(f"Cleaned file saved as {output_file}")
 MODEL_PATH = os.path.join(BASE_DIR, "best_model.pkl")
 SCALER_PATH = os.path.join(BASE_DIR, "scaler.pkl")
 ENCODER_PATH = os.path.join(BASE_DIR, "one_hot_encoder.pkl")
@@ -66,4 +76,5 @@ if st.button("Predict Selling Price"):
     predicted_price = model.predict(X_processed_ordered)[0]
 
     st.success(f"💰 Predicted Selling Price: ₹{predicted_price:,.2f}")
+
 
